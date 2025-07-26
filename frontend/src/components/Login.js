@@ -64,6 +64,7 @@ function Login() {
             {error && <p className="login-error">{error}</p>}
             {success && <p className="login-success">{success}</p>}
             <Link to="/signup" className="login-link">Don't have an account? Signup</Link>
+            <Link to="/forgot-password" className="login-link">Forgot your password? Reset it here</Link> {/* Added link */}
         </div>
     );
 }
