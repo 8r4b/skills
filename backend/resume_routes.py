@@ -19,11 +19,15 @@ async def upload_resume(
         if not user.is_verified:
             raise HTTPException(status_code=403, detail="Email not verified. Please verify your email to use this service.")
 
+        # Read the uploaded file
         text = await read_resume(file)
         if not text:
             raise HTTPException(status_code=400, detail="Unsupported file or empty content")
 
+        # Extract skills and feedback
         skills, feedback = extract_skills_and_feedback_from_text(text)
+        print(f"Extracted skills: {skills}")  # Debug log
+        print(f"Extracted feedback: {feedback}")  # Debug log
 
         # Ensure skills are properly formatted
         formatted_skills = ", ".join(skills)
