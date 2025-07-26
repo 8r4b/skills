@@ -166,7 +166,6 @@ python-jose==3.5.0
 python-multipart==0.0.20
 pytube==15.0.0
 pytz==2025.2
-pywin32==310
 pyxnat==1.6.3
 PyYAML==6.0.2
 rdflib==7.1.4
