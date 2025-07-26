@@ -10,7 +10,7 @@ app = FastAPI()
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Update with your frontend domain in production
+    allow_origins=["http://localhost:3000", "https://skills-frontend.vercel.app"],  # Replace with your actual frontend URLs
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

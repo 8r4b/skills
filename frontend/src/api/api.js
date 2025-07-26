@@ -3,7 +3,7 @@
 import axios from 'axios';
 
 // Set your backend URL
-const API_BASE_URL = 'http://localhost:8000';
+const API_BASE_URL = 'https://skills-tpzr.onrender.com';
 
 // Create axios instance
 const api = axios.create({
