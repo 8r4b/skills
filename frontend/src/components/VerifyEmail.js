@@ -13,7 +13,7 @@ const VerifyEmail = () => {
     const handleVerify = async () => {
         setLoading(true);
         try {
-            const response = await axios.get(`http://localhost:8000/verify-email?token=${token}`);
+            const response = await axios.get(`https://skills-tpzr.onrender.com/api/verify-email?token=${token}`); // Updated URL
             setMessage(response.data.message);
         } catch (error) {
             setMessage(error.response?.data?.detail || 'Verification failed. Please try again.');

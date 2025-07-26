@@ -15,7 +15,7 @@ const ResetPassword = () => {
     const handleSendToken = async () => {
         setLoading(true);
         try {
-            const response = await axios.post('http://localhost:8000/forgot-password', { email: formData.email });
+            const response = await axios.post('https://skills-tpzr.onrender.com/api/forgot-password', { email: formData.email }); // Updated URL
             setMessage(response.data.message);
             setStep('reset');
         } catch (error) {
@@ -28,10 +28,10 @@ const ResetPassword = () => {
     const handleReset = async () => {
         setLoading(true);
         try {
-            const response = await axios.post('http://localhost:8000/reset-password', {
+            const response = await axios.post('https://skills-tpzr.onrender.com/api/reset-password', {
                 token: formData.token,
                 new_password: formData.newPassword,
-            });
+            }); // Updated URL
             setMessage(response.data.message);
         } catch (error) {
             setMessage(error.response?.data?.detail || 'Password reset failed. Please try again.');

@@ -37,7 +37,7 @@ const ResumeUpload = () => {
         setLoading(true);
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.post('http://localhost:8000/upload-resume', formData, {
+            const response = await axios.post('https://skills-tpzr.onrender.com/api/upload-resume', formData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

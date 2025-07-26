@@ -14,22 +14,26 @@ async def upload_resume(
     user=Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
+    try:
         # Check if the user's email is verified
-    if not user.is_verified:
-        raise HTTPException(status_code=403, detail="Email not verified. Please verify your email to use this service.")
+        if not user.is_verified:
+            raise HTTPException(status_code=403, detail="Email not verified. Please verify your email to use this service.")
 
-    text = await read_resume(file)
-    if not text:
-        raise HTTPException(status_code=400, detail="Unsupported file or empty content")
+        text = await read_resume(file)
+        if not text:
+            raise HTTPException(status_code=400, detail="Unsupported file or empty content")
 
-    skills, feedback = extract_skills_and_feedback_from_text(text)
+        skills, feedback = extract_skills_and_feedback_from_text(text)
 
-    # Ensure skills are properly formatted
-    formatted_skills = ", ".join(skills)
+        # Ensure skills are properly formatted
+        formatted_skills = ", ".join(skills)
 
-    # Store resume data in the database
-    resume = create_resume(db, filename=file.filename, skills=formatted_skills, user_id=user.id)
-    resume.feedback = feedback
-    db.commit()
+        # Store resume data in the database
+        resume = create_resume(db, filename=file.filename, skills=formatted_skills, user_id=user.id)
+        resume.feedback = feedback
+        db.commit()
 
-    return {"filename": file.filename, "skills": skills, "feedback": feedback}
+        return {"filename": file.filename, "skills": skills, "feedback": feedback}
+    except Exception as e:
+        print(f"Error during resume upload: {e}")  # Debug log
+        raise HTTPException(status_code=500, detail="Internal Server Error")
