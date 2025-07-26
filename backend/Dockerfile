@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y build-essential python3-dev libffi-dev 
 # Copy requirements and install dependencies
 COPY requirements.txt .
 RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
 # Copy the rest of the backend code
 COPY . .
@@ -19,4 +19,4 @@ COPY . .
 EXPOSE 8000
 
 # Run the backend
-CMD ["python", "main.py"]
+CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8000"]
