@@ -37,7 +37,7 @@ const ResumeUpload = () => {
         setLoading(true);
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.post('https://skills-tpzr.onrender.com/api/upload-resume', formData, {
+            const response = await axios.post('https://skills-tpzr.onrender.com/api/upload-resume/', formData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -46,10 +46,9 @@ const ResumeUpload = () => {
             const sanitizedSkills = response.data.skills.map(skill => skill.trim()); // Sanitize skills array
             setSkills(sanitizedSkills);
             setFeedback(response.data.feedback);
-            console.log('Skills updated:', sanitizedSkills); // Debug log for skills
-            console.log('Feedback updated:', response.data.feedback); // Debug log for feedback
             setMessage('Resume uploaded successfully!');
         } catch (error) {
+            console.error('Error uploading resume:', error); // Debug log for error
             setMessage(error.response?.data?.detail || 'Failed to upload resume. Please try again.');
         } finally {
             setLoading(false);
