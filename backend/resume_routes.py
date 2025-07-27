@@ -20,7 +20,11 @@ async def upload_resume(
             raise HTTPException(status_code=403, detail="Email not verified. Please verify your email to use this service.")
 
         # Read the uploaded file
-        text = await read_resume(file)
+        try:
+            text = await read_resume(file)
+        except Exception as e:
+            raise HTTPException(status_code=400, detail=f"Error processing file: {str(e)}")
+
         if not text:
             raise HTTPException(status_code=400, detail="Unsupported file or empty content")
 
