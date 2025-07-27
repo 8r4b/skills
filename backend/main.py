@@ -12,7 +12,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",  # Local development
-        "https://skills-h2qytuj01-mohameds-projects-18c8d61d.vercel.app"  # Deployed frontend URL
+        "https://skills-five-nu.vercel.app/"  # Deployed frontend URL
     ],
     allow_credentials=True,
     allow_methods=["*"],
