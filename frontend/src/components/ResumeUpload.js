@@ -42,13 +42,11 @@ const ResumeUpload = () => {
                     Authorization: `Bearer ${token}`,
                 },
             });
-            console.log('API Response:', response.data); // Debug log for API response
             const sanitizedSkills = response.data.skills.map(skill => skill.trim()); // Sanitize skills array
             setSkills(sanitizedSkills);
             setFeedback(response.data.feedback);
             setMessage('Resume uploaded successfully!');
         } catch (error) {
-            console.error('Error uploading resume:', error); // Debug log for error
             setMessage(error.response?.data?.detail || 'Failed to upload resume. Please try again.');
         } finally {
             setLoading(false);

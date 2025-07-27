@@ -20,18 +20,12 @@ async def upload_resume(
             raise HTTPException(status_code=403, detail="Email not verified. Please verify your email to use this service.")
 
         # Read the uploaded file
-        try:
-            text = await read_resume(file)
-        except Exception as e:
-            raise HTTPException(status_code=400, detail=f"Error processing file: {str(e)}")
-
+        text = await read_resume(file)
         if not text:
             raise HTTPException(status_code=400, detail="Unsupported file or empty content")
 
         # Extract skills and feedback
         skills, feedback = extract_skills_and_feedback_from_text(text)
-        print(f"Extracted skills: {skills}")  # Debug log
-        print(f"Extracted feedback: {feedback}")  # Debug log
 
         # Ensure skills are properly formatted
         formatted_skills = ", ".join(skills)
@@ -43,5 +37,4 @@ async def upload_resume(
 
         return {"filename": file.filename, "skills": skills, "feedback": feedback}
     except Exception as e:
-        print(f"Error during resume upload: {e}")  # Debug log
         raise HTTPException(status_code=500, detail="Internal Server Error")
